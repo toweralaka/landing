@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<section id="events">
+    <h1>WHAT PEOPLE ARE SAYING</h1>
+    <div id="show-cased">
+        {% for praise in object_list %}
+        <div class="show-cased">
+            <article class="masonry__brick entry format-standard" data-aos="fade-up">
+                    
+                <div class="entry__thumb">
+                    <a href="#0" class="entry__thumb-link">
+                        <img src="{{ praise.passport.url }}" alt="">
+                    </a>
+                </div>
+
+                <div class="entry__text">
+                    <div class="entry__header">
+                        
+                        <div class="entry__date">
+                            <strong>Date Passed: </strong>{{ praise.date_passed }}
+                        </div>
+                        <strong class="entry__title">{{ praise.exam }}</strong>
+                        
+                    </div>
+                    <div class="entry__excerpt">
+                        {{ praise.testimonial|striptags }}
+                    </div>
+                </div>
+            </article> <!-- end article -->
+        </div>
+        {% endfor %}
+    </div>
+    {% if object_list.has_other_pages %}
+    <div class="row">
+        <div class="col-full">
+            <nav class="pgn">
+                <ul>
+                    {% if object_list.has_previous %}
+                    <li><a class="pgn__prev" href="?page={{ object_list.previous_page_number }}">Prev</a></li>
+                    {% else %}
+                    <li><span class="pgn__prev">Prev</span></li>
+                    {% endif %}
+                    {% for page in object_list.paginator.page_range %}
+                        {% if object_list.number == page %}
+                        <li><span class="pgn__num current">{{ page }}</span></li>
+                        {% else %}
+                        <li><a class="pgn__num" href="?page={{ page }}">{{ page }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if object_list.has_next %}
+                    <li><a class="pgn__next" href="?page={{ object_list.next_page_number }}">Next</a></li>
+                    {% else %}
+                    <li><span class="pgn__next">Next</span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    {% endif %}
+</section>
+<section>
+    <div>
+        {% if object_list|length == 0 %}
+        <h2>Be The First To Tell People About Legacy Tutors</h2>
+        {% else %}
+        <h2>Tell People About Legacy Tutors</h2>
+        {% endif %}
+        <!-- Error messaging -->
+          <div id="errors">
+            <div class="inner">
+              <ul>    
+              {% if form.errors %}
+                <em>Please correct the following:</em>
+                <li class="text-danger small">{{ form.non_field_errors }}</li>
+                {% for field in form %}
+                  {% if field.errors %}<li class="text-danger small">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                {% endfor %}
+              {% endif %}
+              </ul>
+              <span class="text-danger"> {{ error_message}}</span>
+            </div>
+          </div> 
+          <!-- /Error messaging -->
+        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <h3>Upload Your Testimonial</h3>
+            {% for field in form %}
+                {% if field.name == 'date_passed' %}
+                <div >
+                <label class="control-label">{{ field.label_tag }}</label>
+                <div ><input type="date" name="date_passed" id="id_date_passed"></div>
+                <div >
+                    <span class="helptext">{{ field.help_text }}</span>
+                </div>
+                </div>
+                {% else %}
+                <div >
+                    <label class="control-label">{{ field.label_tag }}</label>
+                    <div >{{ field }}</div>
+                    <div >
+                    <span class="helptext">{{ field.help_text }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+          <button class="btn btn-lg btn-primary" type="submit">
+              Upload Testimony</button>
+              <br/>
+        </form>
+        <br/>
+    </div>
+<br/>
+</section>
+{% endblock %}

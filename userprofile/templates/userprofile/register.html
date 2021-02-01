@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+<section id="join-us">
+<div id="enrol">
+    <div class="row">
+        <div class="col-sm-6 col-md-8 col-md-offset-2">
+            <h1 class="text-center login-title">Enrolment Form</h1>
+            <div class="account-wall">
+                <!-- Error messaging -->
+              <div id="errors">
+                <div class="inner">
+                  <ul>    
+                  {% if uform.errors %}
+                    <em>Please correct the following:</em>
+                    <li class="text-danger small">{{ uform.non_field_errors }}</li>
+                    {% for field in uform %}
+                      {% if field.errors %}<li class="text-danger small">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  {% if pform.errors %}
+                    <li class="text-danger small">{{ pform.non_field_errors }}</li>
+                    {% for field in pform %}
+                      {% if field.errors %}<li class="text-danger small">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  {% if rform.errors %}
+                    <li class="text-danger small">{{ rform.non_field_errors }}</li>
+                    {% for field in rform %}
+                      {% if field.errors %}<li class="text-danger small">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  {% if tform.errors %}
+                    <li class="text-danger small">{{ tform.non_field_errors }}</li>
+                    {% for field in tform %}
+                      {% if field.errors %}<li class="text-danger small">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  </ul>
+                  <span class="text-danger small"> {{ error_message}}</span>
+                </div>
+              </div> 
+              <!-- /Error messaging -->
+              <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+                {% for field in uform %}
+                <div >
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div >{{ field }}</div>
+                  <div >
+                    <span class="helptext">{{ field.help_text }}</span>
+                  </div>
+                </div>
+                {% endfor %}
+                {% for field in pform %}
+                <div>
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div >{{ field }}</div>
+                  <div >
+                    <span class="helptext">{{ field.help_text }}</span>
+                  </div>
+                </div>
+                {% endfor %}
+                <h4>Registration Fee</h4>
+                {% for field in rform %}
+                <div>
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div >{{ field }}</div>
+                  <div >
+                    <span class="helptext">{{ field.help_text }}</span>
+                  </div>
+                </div>
+                {% endfor %}
+                <h4>Tuition Fee</h4>
+                {% for field in tform %}
+                <div>
+                  <label class="control-label">{{ field.label_tag }}</label>
+                  <div >{{ field }}</div>
+                  <div >
+                    <span class="helptext">{{ field.help_text }}</span>
+                  </div>
+                </div>
+                {% endfor %}
+                <br/>
+              <button class="btn btn-lg btn-primary" type="submit">
+                  Submit</button> &nbsp;
+                  <br/>
+              <a href="{% url 'login' %}" class="need-help">Login here</a>
+              </form>
+              <br/>
+            </div>
+            <a href="{% url 'management:contact' %}" class="pull-right text-center new-account">Need help? </a><span class="clearfix"></span>
+            <br/>
+          </div>
+    </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+<section id="team_member">
+<!-- Page Content -->
+    <div>
+      <!-- Team Members Row -->
+      <div class="col-md-6">
+        <img id="team-pic" src="{{t.picture.url}}" alt="{{ t.name }}">
+      </div>
+      <div class="col-md-6">
+        <h2>{{t.name|upper}}</h2>
+        <h3>{{t.position|upper}}</h3>
+        <p><i class="fa fa-phone"></i><span> {{t.phone}}</span></p>
+        <ul class="list-inline social-buttons">
+          <li><a href="{{t.twitter}}"><i class="fab fa-twitter"></i></a>
+          </li>
+          <li><a href="{{t.facebook}}"><i class="fab fa-facebook"></i></a>
+          </li>
+          <li><a href="{{t.linkedin}}"><i class="fab fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+      <div style="text-align: left;">
+        <p>{{t.description|striptags}}</p>
+      </div>
+      <br>
+      <div>
+        <p><a href="{% url 'management:lecturers' %}">OTHER LECTURERS</a></p>
+      </div>
+    </div>
+</section>
+{% endblock %}

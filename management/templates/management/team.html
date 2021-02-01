@@ -1,0 +1,58 @@
+{% extends 'general/base.html' %}
+
+{% load static %}
+
+{% block body %}
+<section id="login2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    <div class="arrow">
+      <h1><a class="animated bounceInDown"  data-wow-delay="50s" style="font-family:arial;font-style:oblique;color:#333;">“The strength of the team is each individual member. The strength of each member is the team.” ― Phil Jackson</a></h1>
+    </div>
+  </div>
+</section>
+<!-- Page Content -->
+    <div class="container">
+
+      <!-- Introduction Row -->
+      <p></p>
+
+      <!-- Team Members Row -->
+      <div class="row">
+        <div class="col-lg-12 text-left">
+          <h1 class="my-4">THE BOARD</h1>
+          <p>The management is a team of professional managers who incidentally are part of the lecturing team of a leading Nigerian professional tuition centre. They all have valuable teaching experiences in different disciplines in the professional cadre ranging from Financial Accounting, Financial Management, Taxation, and Management Accounting to Auditing. The team is a formidable one and capable of turning things around. The following are members of the management team.</p>
+        </div>
+        {% for t in team %}
+        <div class="col-lg-6 col-sm-6 text-center mb-4">
+	        <div class="text-center">
+	        	<img src="{{t.picture.url}}" class="img-circle img-fluid d-block mx-auto" alt="" style="width:60%;">
+	          <h3>{{t.name}}</h3>
+	          <H2><strong>{{t.position}}</strong></H2>
+	        </div>
+	        <div class="text-left">
+	          <p class="text-left">{{t.description|truncatechars_html:300|safe}} <a href="{% url 'general:team_member' t.id %}">Read more</a></p>
+	        </div>
+	    </div>
+	        {% endfor %}
+  	  </div>
+
+    </div>
+    <!-- /.container -->
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+{% endblock %}

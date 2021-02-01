@@ -1,0 +1,103 @@
+{% extends 'general/base.html' %}
+
+{% load static %}
+
+{% block body %}
+     <!-- Slider Start -->
+    <section id="slider">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-2">
+            <div class="block">
+              <h1 class="animated bounceInDown"  data-wow-delay="50s" style="font-family:arial black;color:#029fe4;font-size:3vw;">...we take you to The Promised Land</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Wrapper Start -->
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 col-sm-12">
+            <div class="block">
+              <div class="section-title text-left">
+                {{about.greeting | safe}}
+            </div>
+          </div><!-- .col-md-7 close -->
+          <div class="col-md-5 col-sm-12">
+            <div class="block">
+              <img  class="img-fluid" src="{% static 'images/Flier.jpg' %}" alt="Img">
+            </div>
+          </div><!-- .col-md-5 close -->
+        </div>
+      </div>
+    </section>
+    
+    <section id="exams">
+      <div class="container">
+        <div class="row">
+          <div class="section-title">
+            <h2>Professional Examinations</h2>
+            <p>Ican Students nationwide are invited to register for...</p>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-sm-6 col-md-6">
+            <div class="service-item">
+              <img class="img-fluid" src="{% static 'images/atswa.png' %}" alt="ATSWA">
+              <h4>ATSWA</h4>
+              <p>{{atswa.description}}</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <div class="service-item">
+              <img class="img-fluid" src="{% static 'images/ican1.png' %}" alt="ICAN">
+              <h4>ICAN</h4>
+              <p>{{ican.description}}</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <div class="service-item">
+              <img class="img-fluid" src="{% static 'images/acca.jpg' %}" alt="ACCA">
+              <h4>ACCA</h4>
+              <p>{{acca.description}}</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <div class="service-item">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimony">
+    <div class="container">
+      <h2>TESTIMONIES SPEAK FOR US</h2>
+      <div class="row">
+        
+        <div class="col-md-6 col-md-offset-6">
+          <div class="testimony-carousel">
+            <div id="testimony-slider" class="owl-carousel">
+            {% for i in testis %}
+              <div>
+                  
+                  <div class="user">
+                    <img class="img-circle" src="{{i.passport.url}}" alt="person">
+                    <p><span>{{i.name}}</span> {{i.exam_date}}</p>
+                  </div>
+                  <p style="max-height:300px;overflow:scroll;">{{i.testimonial}}</p>
+                  
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <a href="{% url 'general:testimony' %}" class="btn btn-default">View More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    {% endblock %}

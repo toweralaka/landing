@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>LegacyTutors - {% block title %}Home{% endblock %}</title>
+
+    <!-- Loads the path to static files -->
+    {% load static %}
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    
+
+    <!-- Optional theme -->
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="{% static 'general/main2.css' %}">
+    {% block css %}{% endblock %}
+    {% block script %}{% endblock %}
+    <meta name="theme-color" content="#0291e6" />
+  </head>
+  <body>
+    <!-- Header Start -->
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- header Nav Start -->
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Menu</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="index.html">
+                    <img src="{% static 'images/logo1.png' %}" alt="LegacyTutors">
+                  </a>
+                </div>
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+
+                      <li>
+                        <a href="{% url 'logout' %}">
+                          <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                          <span class="caret"></span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header><!-- header close -->
+  {% block body %}
+
+  {% endblock %}
+  
+
+   <!-- footer Start -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="footer-menu">
+              <ul>
+                <li>
+                  <a href="#"><span class="fa fa-linkedin" aria-hidden="true"></span>&nbsp;</a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/legacytutors"><span class="fa fa-instagram" aria-hidden="true"></span>&nbsp;</a>
+                </li>
+                <li>
+                  <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span>&nbsp;</a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/legacy.tutors.3/#"><span class="fa fa-facebook" aria-hidden="true"></span>&nbsp;</a>
+                </li>
+              </ul>
+            </div>
+            <p>LegacyTutors 2017 &copy;  by <a href="http://diamantemine.org/">DML</a>.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+  </body>
+</html>

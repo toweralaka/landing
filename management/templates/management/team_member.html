@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+<section id="team_member">
+      <!-- Team Members Row -->
+        <div class="panel panel-default">
+          <div class="panel-header">
+            <div class="row col-md-12">
+              <div class="col-md-6">
+                <img id="team-pic" src="{{t.picture.url}}" class="img-circle img-fluid d-block mx-auto" alt="">
+              </div>
+              <div class="col-md-6">
+                <br>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div>
+              <h2>{{t.name|upper}}</h2>
+              <h3>{{t.position|upper}}</h3>
+            </div>
+            <div class="col-md-12">
+              <div style="text-align: left;">
+              <p>{{t.description|safe}}</p>
+            </div>
+            </div>
+            <br>
+            <div>
+              <p><a href="{% url 'management:about' %}#board">OTHER TEAM MEMBERS</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</section>
+{% endblock %}

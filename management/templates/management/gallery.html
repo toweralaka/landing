@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+<section id="login2">
+  <div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    <div class="arrow bounce">
+      <h1><a class="animated bounceInDown"  data-wow-delay="50s">OUR STORY...</a></h1>
+<!--       <a class="fa fa-arrow-down fa-2x" href="#contact-form"></a>
+ -->    </div>
+  </div>
+</section>
+ <!-- Page Content -->
+    <div>
+
+      <h2 class="my-4 text-center text-lg-left">Check Out Our Gallery</h2>
+
+      <div class="row text-center text-lg-left gallery">
+      	<div class="col-md-12">
+			<table class="table" id="myTable">
+      {% for i in gal %}
+			    <tr>
+			        <td>
+			        	<div class="col-md-12">
+				          <img class="img-fluid d-block mb-4 h-100" src="{{ i.picture.url }}" alt="{{ i.name }}">
+				          <p>{{ i.name }}</p>
+				        </div>
+			        </td>
+			    </tr>
+      {% endfor %}
+			</table>
+		</div>
+        
+      </div>
+
+    </div>
+    
+<section id="login">
+  <div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+{% endblock %}

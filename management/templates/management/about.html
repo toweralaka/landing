@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main %}
+<section id="about">
+  <h1>ABOUT US</h1>
+  <div class="col-sm-6 col-md-6 col-md-offset-3 text-left">
+    {{ about.greeting|striptags }}
+  </div>
+</section>
+<section id="about">
+  <div class="about">
+    <div class="about-item">
+        <h3>Our Vision</h3>
+        <p>{{ about.vision|striptags }}</p>
+    </div>
+    <div class="about-item">
+        <h3>Our Mission</h3>
+        <p>{{ about.mission|striptags }}</p>
+    </div>
+    <div class="about-item">
+        <h3>Our Philosophy</h3>
+        <p>{{ about.story|striptags }}</p>
+    </div>
+</div>
+
+  <div id="board">
+    <h2 class="my-4">THE BOARD</h2>
+    <p>The management is a team of professional managers who incidentally are part of the lecturing team of a leading Nigerian professional tuition centre. They all have valuable teaching experiences in different disciplines in the professional cadre ranging from Financial Accounting, Financial Management, Taxation, and Management Accounting to Auditing. The team is a formidable one and capable of turning things around. The following are members of the management team.</p>
+  </div>
+  <div id="show-cased">
+      {% for pers in object_list %}
+      <div class="show-cased">
+          <article class="masonry__brick entry format-standard" data-aos="fade-up">
+                  
+              <div class="entry__thumb">
+                  <a href="#0" class="entry__thumb-link">
+                      <img src="{{ pers.picture.url }}" alt="">
+                  </a>
+              </div>
+
+              <div class="entry__text">
+                  <div class="entry__header">
+                      
+                      <div class="entry__date">
+                          {{ pers.name }}
+                      </div>
+                      <strong class="entry__title">{{ pers.position }}</strong>
+                      
+                  </div>
+                  <div class="entry__excerpt">
+                      {{ pers.description|truncatechars_html:300|striptags }}
+                      <a href="{% url 'management:team_member' pers.id %}">Read more</a>
+                  </div>
+              </div>
+          </article> <!-- end article -->
+      </div>
+      {% endfor %}
+  </div>
+  {% if object_list.has_other_pages %}
+  <div class="row">
+      <div class="col-full">
+          <nav class="pgn">
+              <ul>
+                  {% if object_list.has_previous %}
+                  <li><a class="pgn__prev" href="?page={{ object_list.previous_page_number }}">Prev</a></li>
+                  {% else %}
+                  <li><span class="pgn__prev">Prev</span></li>
+                  {% endif %}
+                  {% for page in object_list.paginator.page_range %}
+                      {% if object_list.number == page %}
+                      <li><span class="pgn__num current">{{ page }}</span></li>
+                      {% else %}
+                      <li><a class="pgn__num" href="?page={{ page }}">{{ page }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+                  {% if object_list.has_next %}
+                  <li><a class="pgn__next" href="?page={{ object_list.next_page_number }}">Next</a></li>
+                  {% else %}
+                  <li><span class="pgn__next">Next</span></li>
+                  {% endif %}
+              </ul>
+          </nav>
+      </div>
+  </div>
+  {% endif %}
+
+</section>
+{% endblock %}

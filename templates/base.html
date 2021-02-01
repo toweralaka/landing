@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+    <!-- <link type="text/css" rel="stylesheet" href="{% static 'css/vendor.css' %}"> -->
+    <link rel="shortcut icon" href="{% static 'images/company/favicon.png' %}" />
+    <title>
+        {% block title %}
+        {% endblock %}-LegacyTutors
+    </title>
+    <meta name="theme-color" content="#0291e6" />
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+            <div id="the_brand">
+                <a class="company" href="{% url 'home' %}">
+                    <img src="{% static 'images/company/logo.png' %}" id="header-img" />
+                    <h1>-LegacyTutors</h1>
+                </a>
+            </div>
+            <div class="Navbar__Link Navbar__Link-toggle">
+              MENU
+            </div>
+            <nav id="nav-bar" class="nav-items">
+                    <div class="nav-link">
+                      <a href="{% url 'userprofile:register' %}">
+                        Students
+                      </a>
+                    </div>
+                    <div class="nav-link">
+                      <a href="{% url 'management:testimony' %}">
+                        Testimonials
+                      </a>
+                    </div>
+                    <div class="nav-link">
+                      <a href="{% url 'management:lecturers' %}">
+                        Lecturers
+                      </a>
+                    </div>
+                    <div class="nav-link">
+                      <a href="{% url 'management:about' %}">
+                        About Us
+                      </a>
+                    </div>
+                    <div class="nav-link">
+                      <a href="{% url 'management:gallery' %}">Gallery</a>
+                    </div>
+                    <div class="nav-link {% block contact_active %}{% endblock %}">
+                        <a class="page-scroll" href="{% url 'management:contact' %}">
+                          CONTACT
+                        </a>
+                    </div>
+            </nav>
+        </header>
+        <main>
+            {% block main %}
+            {% endblock %}
+        </main>
+        <footer>Copyright <a href="#">Legacy Tutors 2020</a> | Powered by: <a target="_blank" href="https://diamantemine.com/">DML</a></footer>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+    <!-- <script src="{% static 'js/plugins.js' %}"></script>
+    -->
+    <script>
+      /* menu toggle
+   * ------------------------------------------------------ */
+   function menuToggle() {
+    const navs = document.querySelectorAll('.nav-items')
+  
+    navs.forEach(nav => nav.classList.toggle('Navbar__ToggleShow'));
+  }
+
+    document.querySelector('.Navbar__Link-toggle')
+      .addEventListener('click', menuToggle);
+</script>
+
+</body>
+</html>
