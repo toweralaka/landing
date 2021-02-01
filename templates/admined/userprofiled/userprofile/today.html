@@ -1,0 +1,76 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}<div id="content-main">
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    {% block object-tools-items %}
+    <li>
+        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+        <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
+    </li>
+    {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+    {% endblock %}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}
+<div>
+    <div class="col-md-12">
+        <h1>Today's Traffic</h1>
+        {% if error_message %}
+        <p><em><strong>{{ error_message }}</strong></em></p>
+        {% endif %}
+        <table>
+            <tr>
+                <th class="col-md-1">SN</th>
+                <th class="col-md-1">User</th>
+                <th class="col-md-1">Passport</th>
+                <th class="col-md-3">First Name</th>
+                <th class="col-md-3">Last Name</th>
+                <th class="col-md-1">Location</th>
+                <th class="col-md-1">Card</th>
+                <th class="col-md-1">Date</th>
+            </tr>
+            {% if today %}
+            {% for today in today %}
+            <tr>
+                <td class="col-md-1">{{ forloop.counter }}</td>
+                <td class="col-md-1">{{ today.user }}</td>
+                <td class="col-md-1">{{ today.image_tag }}</td>
+                <td class="col-md-3">{{ today.first_name }}</td>
+                <td class="col-md-3">{{ today.last_name }}</td>
+                <td class="col-md-1">{{ today.location }}</td>
+                <td class="col-md-1">{{ today.serial }}</td>
+                <td class="col-md-1">{{ today.regdate }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+            <td class="colspan-2"><p>There is none today.</p></td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

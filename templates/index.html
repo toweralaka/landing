@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<style>
+#welcome-section {
+    /* background: linear-gradient(rgba(42,40,108, 0.4), rgba(42,40,108, 0.4)), url("{% static 'images/company/Flier.jpg' %}"); */
+    background: linear-gradient(rgba(42,40,108, 0.4), rgba(42,40,108, 0.4)), url("{% static 'images/company/legacy-compd2.jpg' %}");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+<section id="welcome-section">
+    <h1 id="intro">...we take you to The Promised Land</h1>
+</section>
+
+<section id="events">
+    <h3>Professional Examinations</h3>
+    <div id="show-case">
+        <div class="show-case">
+            <figure>
+                <img  class="img-fluid" src="{% static 'images/Flier.jpg' %}" alt="flier">
+                <figcaption>&nbsp;</figcaption>
+            </figure>
+        </div>
+        <div class="show-case">
+            <figure>
+                <img class="img-fluid" src="{% static 'images/atswa.png' %}" alt="ATSWA">
+                <figcaption>
+                    ATSWA
+                    {{atswa.description}}
+                </figcaption>
+            </figure>
+        </div>
+        <div class="show-case">
+            <figure>
+                <img class="img-fluid" src="{% static 'images/ican1.png' %}" alt="ICAN">
+                <figcaption>
+                    ICAN
+                    {{ican.description}}
+                </figcaption>
+            </figure>
+        </div>
+        <div class="show-case">
+            <figure>
+                <img class="img-fluid" src="{% static 'images/acca.jpg' %}" alt="ACCA">
+                <figcaption>
+                    ACCA
+                    {{acca.description}}
+                </figcaption>
+            </figure>
+        </div>
+        <div class="show-case">
+            <figure>
+                <img class="img-fluid" src="{% static 'images/citn.png' %}" alt="CITN">
+                <figcaption>
+                    CITN
+                    {{citn.description}}
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+<section id="testimonials">
+    <h3>WHAT CUSTOMERS ARE SAYING</h3>
+    <div class="about">
+        {% for i in testis %}
+        <div class="about-item">
+            <h4>{{ i.name }}</h4>
+            <p>{{ i.testimonial }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <br/>
+    <div>
+        <a href="{% url 'management:testimony' %}">View More</a>
+    </div>
+    
+</section>
+
+{% endblock %}

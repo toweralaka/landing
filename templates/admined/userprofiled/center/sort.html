@@ -1,0 +1,62 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}<div id="content-main">
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    {% block object-tools-items %}
+    <li>
+        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+        <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
+    </li>
+    {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+    {% endblock %}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}
+<div>
+    <div class="col-md-12">
+        <h1>Active Local Governments</h1>
+        {% if error_message %}
+        <p><em><strong>{{ error_message }}</strong></em></p>
+        {% endif %}
+        <table>
+            <tr>
+                <th class="col-md-3">State</th>
+                <th class="col-md-3">Local Govt</th>
+                <th class="col-md-3">Candidates</th>
+                <th class="col-md-3">Action</th>
+            </tr>
+            {% for center in object_list %}
+            <tr>
+                <td class="col-md-3">{{ center.state }}</td>
+                <td class="col-md-3">{{ center }}</td>
+                <td class="col-md-3">{{ center.candidates }}</td>
+                <td class="col-md-3"><a href="{% url 'customadmin:sort' center.id %}">Sort Users</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'user_base.html' %}
+
+{% load static %}
+{% block css %}<link href="{% static 'general/profile.css' %}" rel="stylesheet" media="screen">{% endblock %}
+
+{% block title %}{{ userprofile.first_name }}{% endblock %}
+
+{% block main %}
+  <section>
+    <div class="container">
+      <div>
+        {% if error_message %}
+          <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <div>
+          <div>
+            <br>
+            <h4>Welcome {{ userprofile.other_names }}</h4>
+            <br>
+            <p>
+              <a href="{% url 'userprofile:profile' %}" class="page-scroll btn btn-xl" style="width: 100%;">Profile</a>
+            </p>
+            <p>
+              <a href="{% url 'userprofile:profileupdate' %}" class="page-scroll btn btn-xl" style="width: 100%;">Update Profile</a>
+            </p>
+            <p>
+              <a href="#" class="page-scroll btn btn-xl" style="width: 100%;">Download Resources</a>
+            </p>
+            <br><br>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div>
+          <div>
+            <div class="details">
+              {% block box %}
+              <label>
+                Registration No.:
+              </label><br>
+              {{ userprofile.reg_no }}<br><br>
+              <label>
+                NAME:
+              </label><br>
+              {{ userprofile.surname|upper }}, {{ userprofile.other_names|upper }}
+              <br>
+              <label>
+                Phone Number:
+              </label><br>
+              {{ userprofile.phone }}<br>
+              <label>
+                Sex:
+              </label><br>
+              {{ userprofile.sex }}<br><br>
+              
+              {% if userprofile.user.username == userprofile.email %}
+              <label>
+                Email:
+              </label><br>
+              {{ userprofile.email }}<br><br>
+              {% else %}
+              <label>
+                Login Email:
+              </label><br>
+              {{ userprofile.user.username }}<br><br>
+              <label>
+               Updated Email:
+              </label><br>
+              {{ userprofile.email }}<br><br>
+              {% endif %}
+              <label>
+                Examination:
+              </label><br>
+              {{ userprofile.exam }}
+              <br>
+              <label>
+                Registered Courses:
+              </label><br>
+              <ul>
+              {% for sub in userprofile.courses.all %}
+              <li>{{ sub.name }}</li>
+              {% endfor %}
+              </ul>
+              <br>
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2 col-md-2">
+        <div>
+          <div>
+            <h3>
+            <label>
+              Passport Photo: 
+            </label>
+            </h3>
+            <br>
+            <img src="{{ userprofile.passport.url }}" class="img-responsive" style="width: 100px; float: left; margin-right: 10px;" /><br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

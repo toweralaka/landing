@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block main %}
+<section id="contact">
+  <div class="location">
+    <div class="address">
+      <h3>CONTACT</h3>
+      <p>
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Address: {{ cont.address }}
+      </p>
+      <p>
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Email: {{ cont.email }}
+      </p>
+      <p>
+        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;Phone:{% if cont.phone1 %} {{ cont.phone1 }}{% endif %}{% if cont.phone2 %}, {{ cont.phone2 }}{% endif %}{% if cont.phone3 %}, {{ cont.phone3 }}{% endif %}{% if cont.phone4 %}, {{ cont.phone4 }}{% endif %}
+      </p>
+    
+      <ul id="social-icons">
+        <li>
+          <a href="{{ cont.linkedin }}"><span class="fa fa-linkedin" aria-hidden="true"></span>&nbsp;</a>
+        </li>
+        <li>
+          <a href="{{ cont.instagram }}"><span class="fa fa-instagram" aria-hidden="true"></span>&nbsp;</a>
+        </li>
+        <li>
+          <a href="{{ cont.twitter }}"><span class="fa fa-twitter" aria-hidden="true"></span>&nbsp;</a>
+        </li>
+        <li>
+          <a href="{{ cont.facebook }}"><span class="fa fa-facebook" aria-hidden="true"></span>&nbsp;</a>
+        </li>
+      </ul>
+    </div>
+    <div class="google-map">
+      <div id="map">
+        Idi-Iroko, Lagos, Nigeria,
+      </div>
+    </div>
+  </div>
+</section>
+<section id="talk">
+  <h3>SEND US A MESSAGE</h3>
+  <div id="quote">
+      <!-- Error messaging -->
+      <div id="errors">
+        <div class="inner">
+          <ul>    
+          {% if form.errors %}
+            <em>Please correct the following:</em>
+            <li class="text-danger small">{{ form.non_field_errors }}</li>
+            {% for field in form %}
+              {% if field.errors %}<li class="text-danger small">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+          {% endif %}
+          </ul>
+          <span class="text-danger small"> {{ error_message}}</span>
+        </div>
+      </div> 
+      <!-- /Error messaging -->
+      
+      <form id="form1" action="" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group ">
+          <label class="control-label">{{ field.label_tag }}</label>
+          <div >{{ field }}</div>
+          <div >
+            <span class="helptext">{{ field.help_text }}</span>
+          </div>
+        </div>
+        {% endfor %}
+          <div class="button">
+              <button id="submit1">Send Message</button>
+          </div>
+      </form>
+  </div>
+</section>
+  {% endblock %}
+

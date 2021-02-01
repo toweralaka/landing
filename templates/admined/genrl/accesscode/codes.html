@@ -1,0 +1,91 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}<div id="content-main">
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    {% block object-tools-items %}
+    <li>
+        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+        <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
+    </li>
+    {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+    {% endblock %}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}
+<form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
+    <div>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+        <div>
+            <label class="control-label col-sm-2" for="id_number">
+                Number:
+            </label>
+            <div class="col-sm-10">
+                <input id="id_number" maxlength="5" name="number" type="text">
+            </div>
+        </div>
+        <div>
+            <label class="control-label col-sm-2" for="id_uses">
+                Uses:
+            </label>
+            <div class="col-sm-10">
+                <input id="id_uses" maxlength="3" name="uses" type="text">
+            </div>
+        </div>
+        <div>
+            <label class="control-label col-sm-2" for="id_name">
+                Name:
+            </label>
+            <div class="col-sm-10">
+                <input id="id_name" maxlength="30" name="name" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input id="id_password" maxlength="30" name="password" type="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<div style="margin: 5%;">
+    <div>
+        
+    </div>
+    <div>
+        <ol>
+            {% for c in code_list %}
+            <li>{{c}}</li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+{% endblock %}

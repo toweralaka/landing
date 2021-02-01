@@ -1,0 +1,69 @@
+{% extends 'general/base.html' %}
+
+{% load static %}
+
+{% block body %}
+<section id="login2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    <div class="arrow">
+      <h1><a class="animated bounceInDown"  data-wow-delay="50s">OUR SEASONED TEAM</a></h1>
+    </div>
+  </div>
+</section>
+<!-- Page Content -->
+    <div class="container">
+
+      <!-- Introduction Row -->
+      <p></p>
+
+      <!-- Team Members Row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="my-4"></h1>
+	  <p>The management is a team of professional managers who incidentally are part of the lecturing team of a leading Nigerian professional tuition centre. They all have valuable teaching experiences in different disciplines in the professional cadre ranging from Financial Accounting, Financial Management, Taxation, and Management Accounting to Auditing. The team is a formidable one and capable of turning things around. The following are members of the management team.</p>
+        </div>
+	{% for t in team %}
+        <div class="col-lg-3 col-sm-6 text-center mb-4">
+        	<img src="{{t.picture.url}}" class="img-circle img-fluid d-block mx-auto" alt="">
+		<h3>{{t.name}}
+            	<small>{{t.title}}</small>
+          	</h3>
+        </div>
+        <div class="col-lg-9 col-sm-6 text-center mb-4">
+	<details>
+	<summary><p>{{t.description|safe}}</p></summary>
+          <p>{{t.description|safe}}</p>
+	</details>
+         <ul class="list-inline social-buttons">
+            <li><a href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li><a href="#"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+            </li>
+        </ul>
+        </div>
+	{% endfor %}
+      </div>
+
+
+    </div>
+    <!-- /.container -->
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+{% endblock %}

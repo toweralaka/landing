@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
+{% endblock %}
+
+{% block main %}
+
+
+<section id="login2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    <div class="arrow bounce">
+      <h1><a class="animated bounceInDown"  data-wow-delay="50s">WHAT PEOPLE HAVE TO SAY ABOUT US</a></h1>
+      <a class="fa fa-arrow-down fa-2x" href="#contact-form"></a>
+    </div>
+  </div>
+</section>
+<div class="container login">
+    <div class="row">
+    	<div class="wrapper">
+    		<div  class="col-md-7 testi">
+				<table class="table" id="myTable">
+				    <tr>
+				        <th><h1>Students' Testimonials</h1></th>
+				    </tr>
+				    {% for i in testis %}
+				    <tr>
+				        <td>
+				        	<div class="col-md-6" style="overflow: scroll; max-height:450px;">
+				              	<div>
+				                  	<p>{{i.testimonial}}</p>
+					                </div>
+				                </div>
+				            </div>
+				            <div class="col-md-6">
+				              	<div>
+					                <div class="user">
+					                	<p><span>{{i.name}}</span> {{i.date_passed}}</p>
+					                    <img class="img-circle img-fluid" src="{{i.passport.url}}" alt="person">   
+					                </div>
+				                </div>
+				            </div>
+				        </td>
+				    </tr>
+				    {% endfor %}
+				</table>
+			</div>
+			<div class="col-md-5">
+    			<div class="table testimony-box">
+    				<h1>Upload Your Testimonial</h1>
+    				<!-- Error messaging -->
+	              	<div id="errors">
+		                <div class="inner">
+		                  <ul>    
+		                  {% if form.errors %}
+		                    <em>Please correct the following:</em>
+		                    <li class="text-danger small">{{ form.non_field_errors }}</li>
+		                    {% for field in form %}
+		                      {% if field.errors %}<li class="text-danger small">{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+		                    {% endfor %}
+		                  {% endif %}
+		                  </ul>
+		                  <span class="text-danger"> {{ error_message}}</span>
+		                </div>
+		              </div> 
+		              <!-- /Error messaging -->
+    				<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+		                {% for field in form %}
+		                <div >
+		                  <label class="control-label">{{ field.label_tag }}</label>
+		                  <div >{{ field }}</div>
+		                  <div >
+		                    <span class="helptext">{{ field.help_text }}</span>
+		                  </div>
+		                </div>
+		                {% endfor %}
+		              <button class="btn btn-lg btn-primary" type="submit">
+		                  Submit</button>
+    				</form>
+    			</div>
+    		</div>
+		</div>
+	</div>
+</div>
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/jsi18n/"></script>
+<script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/actions.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/calendar.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script>
+
+{% endblock %}
